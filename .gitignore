@@ -1,0 +1,9 @@
+# -----------------------------------------------------------------------------
+# SRPG Studio
+# -----------------------------------------------------------------------------
+/Backup
+## environment.evs is generated when the game starts
+/environment.evs
+/Localization/localization.dat
+/srpg_log.txt
+/Save
