@@ -967,7 +967,7 @@ var BattleTransition = defineObject(BaseObject,
 	},
 	
 	_getScrollPixel: function() {
-		var d = 40;
+		var d = this._getBasePixel();
 	
 		if (!DataConfig.isHighPerformance()) {
 			d *= 2;
@@ -978,6 +978,10 @@ var BattleTransition = defineObject(BaseObject,
 		}
 		
 		return d;
+	},
+	
+	_getBasePixel: function() {
+		return 40;
 	},
 	
 	_getMargin: function() {

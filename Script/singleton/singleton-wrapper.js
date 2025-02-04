@@ -30,6 +30,11 @@ var SetupControl = {
 	}
 };
 
+var LoadControl = {
+	start: function(customObject) {
+	}
+};
+
 var RetryControl = {
 	// It's called when retrying a game.
 	// The argument is the return value of _getCustomObject.

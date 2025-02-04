@@ -81,7 +81,7 @@ var UnitMenuScreen = defineObject(BaseScreen,
 			text = this._bottomWindowArray[index].getHelpText();
 		}
 		else {
-			text = this._unit.getDescription();
+			text = this._getBottomDescription();
 		}
 		
 		TextRenderer.drawScreenBottomText(text, textui);
@@ -255,6 +255,10 @@ var UnitMenuScreen = defineObject(BaseScreen,
 		}
 		
 		return list;
+	},
+	
+	_getBottomDescription: function() {
+		return this._unit.getDescription();
 	},
 	
 	_isUnitSentenceVisible: function() {
@@ -697,6 +701,10 @@ var BaseInteraction = defineObject(BaseObject,
 					this._changeTopic();
 				}
 			}
+			
+			if (this._window !== null) {
+				this._window.moveWindow();
+			}
 		}
 		else {
 			index = this._getTracingIndex();
@@ -705,7 +713,7 @@ var BaseInteraction = defineObject(BaseObject,
 				this._changeTopic();
 			}
 		}
-	
+		
 		return MoveResult.CONTINUE;
 	},
 	

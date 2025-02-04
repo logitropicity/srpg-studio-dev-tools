@@ -40,8 +40,10 @@ function ScriptCall_Reset()
 }
 
 // It's called when loading a save file is completed.
-function ScriptCall_Load()
+function ScriptCall_Load(customObject)
 {
+	LoadControl.start(customObject);
+	
 	// The ScriptCall_Enter is called when control is returned.
 }
 

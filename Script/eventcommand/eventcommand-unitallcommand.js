@@ -655,15 +655,16 @@ var AllEventFlowEntry = defineObject(BaseFlowEntry,
 	},
 	
 	_hpRecovery: function(generator, targetUnit, command) {
-		generator.hpRecovery(targetUnit, command.getRecoveryAnime(), command.getRecoveryValue(), command.getRecoveryType(), this._isCommandSkip(command));
+		var anime = validateNull(command.getRecoveryAnime());
+		
+		generator.hpRecovery(targetUnit, anime, command.getRecoveryValue(), command.getRecoveryType(), this._isCommandSkip(command));
 	},
 	
 	_damagehit: function(generator, targetUnit, command) {
-		var launchUnit = command.getLaunchUnit();
-		if (launchUnit == null) {
-			launchUnit = {};
-		}
-		generator.damageHitEx(targetUnit, command.getDamageAnime(), command.getDamageValue(), command.getDamageType(), command.getHit(), launchUnit, this._isCommandSkip(command));
+		var anime = validateNull(command.getDamageAnime());
+		var launchUnit = validateNull(command.getLaunchUnit())
+		
+		generator.damageHitEx(targetUnit, anime, command.getDamageValue(), command.getDamageType(), command.getHit(), launchUnit, this._isCommandSkip(command));
 	},
 	
 	_experiencePlus: function(generator, targetUnit, command) {

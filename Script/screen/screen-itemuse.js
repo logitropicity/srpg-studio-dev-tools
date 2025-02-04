@@ -42,7 +42,10 @@ var ItemUseScreen = defineObject(BaseScreen,
 		}
 		
 		this._itemUserWindow.moveWindow();
-		this._itemInfoWindow.moveWindow();
+		
+		if (!this._itemUserWindow.getSkillInteraction().isHelpMode()) {
+			this._itemInfoWindow.moveWindow();
+		}
 		
 		return result;
 	},
@@ -180,6 +183,7 @@ var ItemUseScreen = defineObject(BaseScreen,
 			}
 		}
 		else if (input === ScrollbarInput.CANCEL) {
+			this._itemUserWindow.getSkillInteraction().cancelInteraction();
 			this._processMode(ItemUseScreenMode.OPERATION);
 		}
 		else {
@@ -357,6 +361,7 @@ var ItemUseScreen = defineObject(BaseScreen,
 	_processMode: function(mode) {
 		if (mode === ItemUseScreenMode.OPERATION) {
 			this._itemUseOperationWindow.enableSelectCursor(true);
+			this._itemInfoWindow.setInfoItem(null);
 			
 			this._getItemListWindow().setActive(false);
 			this._getItemListWindow().setForceSelect(-1);

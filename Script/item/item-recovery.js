@@ -33,7 +33,9 @@ var RecoveryItemUse = defineObject(BaseItemUse,
 	},
 	
 	_getItemRecoveryAnime: function(itemTargetInfo) {
-		return itemTargetInfo.item.getItemAnime();
+		var anime = itemTargetInfo.item.getItemAnime();
+		
+		return validateNull(anime);
 	}
 }
 );

@@ -565,14 +565,14 @@ var RecoveryAllFlowEntry = defineObject(BaseFlowEntry,
 	_getRecoveryValue: function(unit) {
 		var recoveryValue = 0;
 		
-		recoveryValue += this._getRecoveryValueIntrnalForSkill(unit);
-		recoveryValue += this._getRecoveryValueIntrnalForTerrain(unit);
-		recoveryValue += this._getRecoveryValueIntrnalForState(unit);
+		recoveryValue += this._getRecoveryValueInternalForSkill(unit);
+		recoveryValue += this._getRecoveryValueInternalForTerrain(unit);
+		recoveryValue += this._getRecoveryValueInternalForState(unit);
 		
 		return recoveryValue;
 	},
 	
-	_getRecoveryValueIntrnalForSkill: function(unit) {
+	_getRecoveryValueInternalForSkill: function(unit) {
 		var recoveryValue = 0;
 		var skill = skill = SkillControl.getBestPossessionSkill(unit, SkillType.AUTORECOVERY);
 		
@@ -587,7 +587,7 @@ var RecoveryAllFlowEntry = defineObject(BaseFlowEntry,
 		return recoveryValue;
 	},
 	
-	_getRecoveryValueIntrnalForTerrain: function(unit) {
+	_getRecoveryValueInternalForTerrain: function(unit) {
 		var recoveryValue = 0;
 		var terrain = PosChecker.getTerrainFromPos(unit.getMapX(), unit.getMapY());
 		
@@ -598,7 +598,7 @@ var RecoveryAllFlowEntry = defineObject(BaseFlowEntry,
 		return recoveryValue;
 	},
 	
-	_getRecoveryValueIntrnalForState: function(unit) {
+	_getRecoveryValueInternalForState: function(unit) {
 		return StateControl.getHpValue(unit);
 	},
 	
@@ -619,15 +619,22 @@ var RecoveryAllFlowEntry = defineObject(BaseFlowEntry,
 	},
 	
 	_getTurnRecoveryAnime: function() {
+		var anime;
+		
 		if (this._recentRecoverySkill !== null && this._recentRecoverySkill.getEasyAnime() !== null) {
-			return this._recentRecoverySkill.getEasyAnime();
+			anime = this._recentRecoverySkill.getEasyAnime();
+		}
+		else {
+			anime = root.queryAnime('easyrecovery');
 		}
 		
-		return root.queryAnime('easyrecovery');
+		return validateNull(anime);
 	},
 	
 	_getTurnDamageAnime: function() {
-		return root.queryAnime('easydamage');
+		var anime = root.queryAnime('easydamage');
+		
+		return validateNull(anime);
 	}
 }
 );

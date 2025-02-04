@@ -58,6 +58,14 @@ var UnitSentenceWindow = defineObject(BaseWindow,
 		return 25;
 	},
 	
+	isTracingHelp: function() {
+		return false;
+	},
+	
+	getHelpText: function() {
+		return '';
+	},
+	
 	_configureSentence: function(groupArray) {
 		groupArray.appendObject(UnitSentence.Power);
 		groupArray.appendObject(UnitSentence.Hit);
@@ -409,6 +417,8 @@ UnitSentence.Support = defineObject(BaseUnitSentence,
 				y += this._unitSentenceWindow.getUnitSentenceSpaceY();
 			}
 		}
+		
+		this._drawAdditionalMember(x, y, unit, weapon, totalStatus);
 	},
 	
 	getUnitSentenceCount: function(unit) {
@@ -417,6 +427,9 @@ UnitSentence.Support = defineObject(BaseUnitSentence,
 	
 	_getTextLength: function() {
 		return 130;
+	},
+	
+	_drawAdditionalMember: function(x, y, unit, weapon, totalStatus) {
 	}
 }
 );

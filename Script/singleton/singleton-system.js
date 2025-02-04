@@ -424,7 +424,13 @@ var WeaponEffectControl = {
 
 var PosChecker = {
 	getUnitFromPos: function(x, y) {
-		return root.getCurrentSession().getUnitFromPos(x, y);
+		var session = root.getCurrentSession();
+		
+		if (session === null) {
+			return null;
+		}
+		
+		return session.getUnitFromPos(x, y);
 	},
 	
 	getMovePointFromUnit: function(x, y, unit) {

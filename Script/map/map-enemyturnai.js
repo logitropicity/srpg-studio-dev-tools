@@ -1691,7 +1691,7 @@ var SkillAutoAction = defineObject(BaseAutoAction,
 		this._dynamicEvent = createObject(DynamicEvent);
 		generator = this._dynamicEvent.acquireEventGenerator();
 		
-		generator.animationPlay(anime, pos.x, pos.y, false, AnimePlayType.SYNC, 1);
+		generator.animationPlay(validateNull(anime), pos.x, pos.y, false, AnimePlayType.SYNC, 1);
 		generator.unitStateChange(this._targetUnit, UnitStateChangeFlag.WAIT, 1);
 		
 		if (this._skill !== null && this._skill.getSkillValue() === QuickValue.SURROUNDINGS) {

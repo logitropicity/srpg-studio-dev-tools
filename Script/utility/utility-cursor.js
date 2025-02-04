@@ -479,7 +479,8 @@ var MapCursor = defineObject(BaseObject,
 		var session = root.getCurrentSession();
 		var xCursor = session.getMapCursorX();
 		var yCursor = session.getMapCursorY();
-		var n = root.getCurrentSession().getMapBoundaryValue();
+		var xMin = this._getBoundaryX(session);
+		var yMin = this._getBoundaryY(session);
 		
 		if (input === InputType.LEFT) {
 			xCursor--;
@@ -494,17 +495,17 @@ var MapCursor = defineObject(BaseObject,
 			yCursor++;
 		}
 		
-		if (xCursor < n) {
-			xCursor = n;
+		if (xCursor < xMin) {
+			xCursor = xMin;
 		}
-		else if (yCursor < n) {
-			yCursor = n;
+		else if (yCursor < yMin) {
+			yCursor = yMin;
 		}
-		else if (xCursor > CurrentMap.getWidth() - 1 - n) {
-			xCursor = CurrentMap.getWidth() - 1 - n;
+		else if (xCursor > CurrentMap.getWidth() - 1 - xMin) {
+			xCursor = CurrentMap.getWidth() - 1 - xMin;
 		}
-		else if (yCursor > CurrentMap.getHeight() - 1 - n) {
-			yCursor = CurrentMap.getHeight() - 1 - n;
+		else if (yCursor > CurrentMap.getHeight() - 1 - yMin) {
+			yCursor = CurrentMap.getHeight() - 1 - yMin;
 		}
 		else {
 			// A cursor was moved, so play a sound.
@@ -515,6 +516,14 @@ var MapCursor = defineObject(BaseObject,
 		
 		session.setMapCursorX(xCursor);
 		session.setMapCursorY(yCursor);
+	},
+	
+	_getBoundaryX: function(session) {
+		return session.getMapBoundaryValue();
+	},
+	
+	_getBoundaryY: function(session) {
+		return session.getMapBoundaryValue();
 	},
 	
 	_playMovingSound: function() {

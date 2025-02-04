@@ -2896,17 +2896,33 @@ UnitCommand.FusionRelease = defineObject(BaseFusionCommand,
 	},
 	
 	_isPosEnabled: function(x, y) {
-		var n = root.getCurrentSession().getMapBoundaryValue();
+		var xMin, yMin;
+		var session = root.getCurrentSession();
 		
-		if (x < n || y < n) {
+		if (session === null) {
 			return false;
 		}
 		
-		if (x > CurrentMap.getWidth() - 1 - n || y > CurrentMap.getHeight() - 1 - n) {
+		xMin = this._getBoundaryX(session);
+		yMin = this._getBoundaryY(session);
+		
+		if (x < xMin || y < yMin) {
+			return false;
+		}
+		
+		if (x > CurrentMap.getWidth() - 1 - xMin || y > CurrentMap.getHeight() - 1 - yMin) {
 			return false;
 		}
 		
 		return true;
+	},
+	
+	_getBoundaryX: function(session) {
+		return session.getMapBoundaryValue();
+	},
+	
+	_getBoundaryY: function(session) {
+		return session.getMapBoundaryValue();
 	}
 }
 );

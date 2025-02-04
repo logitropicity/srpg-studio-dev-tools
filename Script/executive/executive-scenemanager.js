@@ -16,10 +16,12 @@ var SceneManager = {
 		
 		CacheControl.clearCache();
 		
+		// This variable will be updated if "Call Save Screen" is used in the op event immediately after the game starts.
+		// Initialize the variable before updating to "Call Save Screen".
+		this._isForceForeground = false;
+		
 		this._activeAcene = this._createSceneObject(sceneType);
 		this._activeAcene.setSceneData();
-		
-		this._isForceForeground = false;
 		
 		return EnterResult.OK;
 	},

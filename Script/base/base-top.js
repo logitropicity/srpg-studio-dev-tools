@@ -123,6 +123,13 @@ var deserializeResourceHandle = function(obj) {
 	return root.createResourceHandle(obj.type === ResourceHandleType.RUNTIME, obj.id, obj.colorIndex, obj.x, obj.y);
 };
 
+// Specifying null in the script API will cause an error.
+// Therefore, if the variable through this function is null, a blank object will be returned.
+// For example, if "None" is selected in the animation data for Resource Location, null will be returned.
+var validateNull = function(data) {
+	return data !== null ? data : {};
+};
+
 var createPos = function(x, y) {
 	var obj = {};
 	
