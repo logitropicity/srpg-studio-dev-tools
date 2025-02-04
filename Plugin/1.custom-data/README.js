@@ -1,8 +1,8 @@
 /* -----------------------------------------------------------------------------
 
-Allows saving / loading additional custom data to / from save files.
+Thin wrapper for saving / loading additional custom data to / from save files.
 
-Save / load objects by overriding CustomDataManager.save() / .load() .
+Save / load objects by overriding LoadControl.save() / .load() .
 
 Note that you can only load primitive objects & data types from the save
 file - basically JSON with functions. References aren't serialized, so if you

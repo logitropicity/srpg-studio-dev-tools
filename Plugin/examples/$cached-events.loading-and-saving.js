@@ -3,7 +3,7 @@ var Cache = {
 };
 
 
-Object.assign(CustomDataManager, {
+Object.assign(LoadControl, {
     save: function() {
         return {
             'Cache.Events': (Cache.Events || []).map(serialize)

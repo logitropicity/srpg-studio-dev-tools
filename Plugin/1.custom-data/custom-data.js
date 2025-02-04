@@ -1,37 +1,27 @@
-var CustomDataManager = {
+Object.assign(LoadControl, {
     save: function() {
-        return data;
+        // override me!
+        return {};
     },
 
     load: function(data) {
-        return data;
-    }
-};
+        // override me!
+    },
+
+    start: wrap(LoadControl.start, function(prevFunc) {
+        return function(customObject) {
+            prevFunc.call(this);
+            this.load(customObject.customData);
+        };
+    })
+});
 
 
 Object.assign(LoadSaveScreen, {
-    _executeLoad: function() {
-        var object = this._scrollbar.getObject();
-
-        if (object.isCompleteFile() || object.getMapInfo() !== null) {
-            SceneManager.setEffectAllRange(true);
-
-            // root.changeScene is called inside and changed to the scene which is recorded at the save file.
-            // --- changes start here ---
-            var index = this._scrollbar.getIndex();
-            var loadSaveManager = root.getLoadSaveManager();
-            loadSaveManager.loadFile(index);
-
-            var saveFileInfo = loadSaveManager.getSaveFileInfo(index);
-            CustomDataManager.load(saveFileInfo.custom.customData || {});
-            // ---- changes end here ----
-        }
-    },
-
     _getCustomObject: wrap(LoadSaveScreen._getCustomObject, function(prevFunc) {
         return function() {
-            var obj = prevFunc.call(this, obj) || {};
-            obj.customData = CustomDataManager.save();
+            obj = prevFunc.call(this) || {};
+            obj.customData = LoadControl.save();
             return obj;
         };
     })
